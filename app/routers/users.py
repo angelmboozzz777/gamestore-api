@@ -106,7 +106,7 @@ def delete_user(user_id: int, db: Database = Depends(get_db),
                 current: dict = Depends(get_current_user)):
     _own_or_admin(user_id, current)
     user = _get_or_404(db, user_id)
-    # Sus carritos se borran con el (como el ON DELETE CASCADE de MySQL).
+    # Sus carritos se borran con el.
     db.carts.delete_many({"userId": user_id})
     db.users.delete_one({"_id": user_id})
     return user_out(user)

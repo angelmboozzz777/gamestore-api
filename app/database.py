@@ -20,7 +20,7 @@ def get_db() -> Database:
 
 
 def siguiente_id(base: Database, coleccion: str) -> int:
-    """Id numerico autoincremental (1, 2, 3...), como el AUTO_INCREMENT de MySQL.
+    """Id numerico autoincremental (1, 2, 3...).
 
     La app de Flutter trabaja con ids enteros, asi que no usamos el ObjectId
     de Mongo. El ultimo id de cada coleccion se guarda en "counters".
@@ -35,7 +35,7 @@ def siguiente_id(base: Database, coleccion: str) -> int:
 
 
 def crear_indices(base: Database) -> None:
-    """Indices equivalentes a los que tenian las tablas de MySQL."""
+    """Indices para busquedas rapidas y para que username y email no se repitan."""
     base.users.create_index([("username", ASCENDING)], unique=True)
     base.users.create_index([("email", ASCENDING)], unique=True)
     base.games.create_index([("title", ASCENDING)])

@@ -20,7 +20,7 @@ Los datos viven en MongoDB Atlas, base `gamestore`, con estas colecciones:
 | `games` | videojuegos (`rating` va como subdocumento) |
 | `users` | usuarios; `name` y `address` como subdocumentos; contrasena con hash bcrypt |
 | `carts` | carritos; los productos van dentro del carrito: `products: [{gameId, quantity}]` |
-| `counters` | ultimo id usado en cada coleccion (los ids son numeros 1, 2, 3..., como en MySQL) |
+| `counters` | ultimo id usado en cada coleccion (los ids son numeros 1, 2, 3...) |
 
 Copia `.env.example` a `.env` y pon tu cadena de conexion de Atlas
 (Atlas -> Connect -> Drivers). **El `.env` no se sube a git** porque lleva tu contrasena.
