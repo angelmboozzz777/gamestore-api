@@ -1,3 +1,4 @@
+import os
 import socket
 import sys
 from contextlib import asynccontextmanager
@@ -37,6 +38,11 @@ async def lifespan(app: FastAPI):
     crear_indices(base_de_datos)
     # 0.0.0.0 solo significa "escuchar en todas las interfaces";
     # no es una direccion que se pueda abrir en el navegador.
+    url_publica = os.getenv("RENDER_EXTERNAL_URL")
+    if url_publica:  # corriendo en Render
+        print(f"  GameStore API lista en {url_publica}  (docs: {url_publica}/docs)")
+        yield
+        return
     port = puerto_actual()
     print()
     print("  GameStore API lista. Abrela en:")

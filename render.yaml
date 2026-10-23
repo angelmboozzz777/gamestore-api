@@ -1,0 +1,21 @@
+# Configuracion para desplegar la API en Render (render.com).
+# En Render: New -> Blueprint -> elige este repositorio.
+# Solo te va a pedir MONGODB_URI (la cadena de Atlas); lo demas se llena solo.
+services:
+  - type: web
+    name: gamestore-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # Render da el puerto en la variable $PORT.
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: MONGODB_URI
+        sync: false        # se escribe a mano en Render (lleva tu contrasena)
+      - key: MONGODB_DB
+        value: gamestore
+      - key: SECRET_KEY
+        generateValue: true  # Render genera una clave segura
+      - key: TOKEN_EXPIRE_MINUTES
+        value: "1440"

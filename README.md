@@ -136,17 +136,24 @@ Mira `flutter_example/` (modelo `Game` y `ApiService`). Direccion base segun don
 | iOS simulator | `http://localhost:8000` |
 | Celular fisico (misma WiFi) | `http://IP_DE_TU_PC:8000` |
 
-## 6. Publicar (GitHub + Vercel, como en tu clase)
+## 6. Publicar en Render (la API en la nube)
 
-1. Sube el proyecto a GitHub (el `.env` ya esta en `.gitignore`).
-2. La base ya esta en la nube (MongoDB Atlas). Donde hospedes la API pon `MONGODB_URI`, `MONGODB_DB` y `SECRET_KEY` como variables de entorno, y en Atlas -> Network Access permite la IP de ese servidor.
-3. Para Vercel agrega un `vercel.json` que apunte a `app/main.py` como funcion Python (o usa Railway/Render, que corren `uvicorn` directo y son mas sencillos para FastAPI).
+La base ya esta en MongoDB Atlas; la API se publica en [Render](https://render.com) con `render.yaml`:
+
+1. En Render: **New -> Blueprint** y elige este repositorio de GitHub.
+2. Render solo pide **`MONGODB_URI`**: pega la cadena de Atlas (la misma del `.env`).
+   `SECRET_KEY` la genera Render y `MONGODB_DB` ya viene como `gamestore`.
+3. En Atlas -> Network Access debe estar `0.0.0.0/0`, porque Render cambia de IP.
+4. La API queda en `https://gamestore-api.onrender.com` (o el nombre que te asigne Render).
+
+En el plan gratis, si nadie la usa por 15 minutos se "duerme"; la primera peticion
+despues de eso tarda unos 50 segundos en responder y luego va normal.
 
 ## Estructura
 
 ```
 app/
-  __main__.py    # arranque con: python -m app
+  __main__.py    # arranque local con: python -m app
   main.py        # app FastAPI, CORS, routers
   database.py    # conexion a MongoDB e ids numericos
   models.py      # forma de los documentos y su JSON
@@ -154,4 +161,5 @@ app/
   security.py    # bcrypt + JWT
   routers/       # games, users, carts, auth
 flutter_example/ # modelo y servicio para tu app
+render.yaml      # configuracion para Render
 ```
