@@ -153,13 +153,26 @@ despues de eso tarda unos 50 segundos en responder y luego va normal.
 
 ```
 app/
-  __main__.py    # arranque local con: python -m app
-  main.py        # app FastAPI, CORS, routers
-  database.py    # conexion a MongoDB e ids numericos
-  models.py      # forma de los documentos y su JSON
-  schemas.py     # validacion / JSON de entrada y salida
-  security.py    # bcrypt + JWT
-  routers/       # games, users, carts, auth
-flutter_example/ # modelo y servicio para tu app
-render.yaml      # configuracion para Render
+  __main__.py          # arranque local con: python -m app
+  main.py              # app FastAPI, CORS, rutas / y /health, registra los routers
+  core/                # nucleo
+    database.py        #   conexion a MongoDB Atlas, ids numericos e indices
+    security.py        #   contrasenas (bcrypt) y token JWT, permisos de admin
+  models/              # documento de Mongo -> JSON de la API (uno por coleccion)
+    game.py
+    user.py            #   tambien los roles: admin, auditor, user
+    cart.py
+  schemas/             # validacion de entrada y salida con Pydantic (uno por tema)
+    game.py
+    user.py
+    auth.py
+    cart.py
+  routers/             # endpoints (uno por recurso)
+    auth.py            #   /auth/login
+    games.py           #   /games
+    users.py           #   /users
+    carts.py           #   /carts
+flutter_example/       # modelo y servicio de ejemplo para Flutter
+render.yaml            # configuracion para Render
+requirements.txt       # dependencias de Python
 ```

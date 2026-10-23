@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pymongo.database import Database
 
-from ..database import get_db
-from ..models import user_out
-from ..schemas import LoginIn, TokenOut
-from ..security import create_token, verify_password
+from ..core.database import get_db
+from ..core.security import create_token, verify_password
+from ..models.user import user_out
+from ..schemas.auth import LoginIn, TokenOut
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 

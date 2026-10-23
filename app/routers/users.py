@@ -5,10 +5,10 @@ from pymongo import ASCENDING
 from pymongo.database import Database
 from pymongo.errors import DuplicateKeyError
 
-from ..database import get_db, siguiente_id
-from ..models import ROL_USUARIO, es_admin, user_out
-from ..schemas import UserCreate, UserOut, UserUpdate
-from ..security import get_current_user, hash_password, require_admin
+from ..core.database import get_db, siguiente_id
+from ..core.security import get_current_user, hash_password, require_admin
+from ..models.user import ROL_USUARIO, es_admin, user_out
+from ..schemas.user import UserCreate, UserOut, UserUpdate
 
 router = APIRouter(prefix="/users", tags=["Users"])
 

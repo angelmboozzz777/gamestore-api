@@ -5,10 +5,11 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from pymongo import ASCENDING, DESCENDING
 from pymongo.database import Database
 
-from ..database import get_db, siguiente_id
-from ..models import cart_out, es_admin
-from ..schemas import CartIn, CartOut
-from ..security import get_current_user
+from ..core.database import get_db, siguiente_id
+from ..core.security import get_current_user
+from ..models.cart import cart_out
+from ..models.user import es_admin
+from ..schemas.cart import CartIn, CartOut
 
 router = APIRouter(prefix="/carts", tags=["Carts"])
 

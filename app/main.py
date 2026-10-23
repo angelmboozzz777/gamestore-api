@@ -7,7 +7,7 @@ from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo.database import Database
 
-from .database import MONGODB_DB, crear_indices, db as base_de_datos, get_db
+from .core.database import MONGODB_DB, crear_indices, db as base_de_datos, get_db
 from .routers import auth, carts, games, users
 
 

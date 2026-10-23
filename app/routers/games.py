@@ -5,10 +5,10 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from pymongo import ASCENDING, DESCENDING
 from pymongo.database import Database
 
-from ..database import get_db, siguiente_id
-from ..models import game_out
-from ..schemas import GameCreate, GameOut, GameUpdate
-from ..security import require_admin
+from ..core.database import get_db, siguiente_id
+from ..core.security import require_admin
+from ..models.game import game_out
+from ..schemas.game import GameCreate, GameOut, GameUpdate
 
 router = APIRouter(prefix="/games", tags=["Games"])
 
